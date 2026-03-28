@@ -46,6 +46,34 @@ abstract class AppThemeManager {
 
   static ThemeData darkTheme() => ThemeData(
     primaryColor: AppColors.primaryDark,
+    primaryColorDark: AppColors.primaryDark,
     scaffoldBackgroundColor: AppColors.scaffoldDarkBackgroundColor,
+    appBarTheme: AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
+    ),
   );
 }
