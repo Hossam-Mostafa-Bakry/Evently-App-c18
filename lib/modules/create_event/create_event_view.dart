@@ -1,17 +1,20 @@
 import 'dart:developer';
+import 'package:evently_app/core/utils/firebase_utils/firestore_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import 'package:evently_app/core/config/theme/app_colors.dart';
+import 'package:intl/intl.dart';
+
 import 'package:evently_app/core/gen/assets.gen.dart';
-import 'package:evently_app/core/services/snackbar_service.dart';
 import 'package:evently_app/core/widgets/custom_app_bar.dart';
+import 'package:evently_app/core/config/theme/app_colors.dart';
+import 'package:evently_app/core/services/snackbar_service.dart';
 import 'package:evently_app/core/widgets/custom_button_widget.dart';
 import 'package:evently_app/core/widgets/custom_text_form_filed.dart';
-import 'package:evently_app/models/category_data.dart';
+
 import 'package:evently_app/models/event_data.dart';
+import 'package:evently_app/models/category_data.dart';
 import 'package:evently_app/modules/create_event/widgets/tab_item_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class CreateEventView extends StatefulWidget {
   const CreateEventView({super.key});
@@ -34,25 +37,25 @@ class _CreateEventViewState extends State<CreateEventView> {
       id: "sport",
       name: "Sport",
       icon: Icons.directions_bike,
-      image: Assets.images.sportImg.image(),
+      image: Assets.images.sportImg.path,
     ),
     CategoryData(
       id: "book_club",
       name: "Book Club",
       icon: Icons.auto_stories,
-      image: Assets.images.bookClubImg.image(),
+      image: Assets.images.bookClubImg.path,
     ),
     CategoryData(
       id: "birthday",
       name: "Birthday",
       icon: Icons.cake_outlined,
-      image: Assets.images.birthdayImg.image(),
+      image: Assets.images.birthdayImg.path,
     ),
     CategoryData(
       id: "meeting",
       name: "Meeting",
       icon: Icons.meeting_room_outlined,
-      image: Assets.images.meetingImg.image(),
+      image: Assets.images.meetingImg.path,
     ),
   ];
 
@@ -75,7 +78,7 @@ class _CreateEventViewState extends State<CreateEventView> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: categoriesList[selectedIndex].image,
+                      child: Image.asset(categoriesList[selectedIndex].image),
                     ),
                     SizedBox(height: 16),
                     DefaultTabController(
@@ -197,9 +200,17 @@ class _CreateEventViewState extends State<CreateEventView> {
                         final data = EventData(
                           eventTitle: eventTitleController.text,
                           eventDescription: eventDescriptionController.text,
-                          eventCategory: categoriesList[selectedIndex].id,
+                          eventCategoryID: categoriesList[selectedIndex].id,
                           eventDateTime: selectedDate!,
+                          eventCategoryImage:
+                              categoriesList[selectedIndex].image,
                         );
+
+                        EasyLoading.show();
+                        FirestoreUtils.addEvent(data).then((value) {
+                          EasyLoading.dismiss();
+                          Navigator.pop(context);
+                        });
 
                         /// TODO: save event data on CloudStore then navigate to home screen
                       }

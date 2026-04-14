@@ -26,7 +26,7 @@ class _SignInViewState extends State<SignInView> {
     text: "hossam@gamil.com",
   );
   final TextEditingController _passwordController = TextEditingController(
-    text: "Asdf12345",
+    text: "Asdf@1234",
   );
 
   @override
@@ -76,6 +76,7 @@ class _SignInViewState extends State<SignInView> {
               CustomTextFormFiled(
                 controller: _passwordController,
                 isPassword: true,
+                maxLines: 1,
                 hintText: local.enter_your_password,
                 prefixIcon: Assets.icons.lockIcn.svg(),
                 validator: (value) {

@@ -4,7 +4,7 @@ class CategoryData {
   final String id;
   final String name;
   final IconData icon;
-  final Widget image;
+  final String image;
 
   CategoryData({
     required this.id,

@@ -1,9 +1,51 @@
 import 'package:evently_app/core/config/theme/app_colors.dart';
 import 'package:evently_app/core/gen/assets.gen.dart';
+import 'package:evently_app/core/utils/firebase_utils/firestore_utils.dart';
+import 'package:evently_app/models/event_data.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class EventCardItem extends StatelessWidget {
-  const EventCardItem({super.key});
+class EventCardItem extends StatefulWidget {
+  final EventData eventData;
+
+  const EventCardItem({super.key, required this.eventData});
+
+  @override
+  State<EventCardItem> createState() => _EventCardItemState();
+}
+
+class _EventCardItemState extends State<EventCardItem> {
+  late bool _isFavourite;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFavourite = widget.eventData.isFavourite;
+  }
+
+  Future<void> _toggleFavorite() async {
+    setState(() {
+      _isFavourite = !_isFavourite;
+    });
+
+    final updatedEvent = EventData(
+      eventID: widget.eventData.eventID,
+      eventTitle: widget.eventData.eventTitle,
+      eventDescription: widget.eventData.eventDescription,
+      eventDateTime: widget.eventData.eventDateTime,
+      eventCategoryID: widget.eventData.eventCategoryID,
+      eventCategoryImage: widget.eventData.eventCategoryImage,
+      isFavourite: _isFavourite,
+    );
+
+    try {
+      await FirestoreUtils.updateData(updatedEvent);
+    } catch (e) {
+      setState(() {
+        _isFavourite = !_isFavourite;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +58,7 @@ class EventCardItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.strokeBorder),
         image: DecorationImage(
-          image: Assets.images.sportImg.provider(),
+          image: AssetImage(widget.eventData.eventCategoryImage),
           fit: BoxFit.cover,
         ),
       ),
@@ -31,7 +73,7 @@ class EventCardItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              "21 Jan",
+              DateFormat("dd MMM").format(widget.eventData.eventDateTime),
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w500,
@@ -48,14 +90,19 @@ class EventCardItem extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "This is a Birthday Party ",
+                  widget.eventData.eventTitle,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: AppColors.mainText,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 Spacer(),
-                Assets.icons.heartActiveIcn.svg(),
+                GestureDetector(
+                  onTap: _toggleFavorite,
+                  child: _isFavourite
+                      ? Assets.icons.heartActiveIcn.svg()
+                      : Assets.icons.heartIcn.svg(),
+                ),
               ],
             ),
           ),
