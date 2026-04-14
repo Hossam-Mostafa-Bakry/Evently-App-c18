@@ -32,4 +32,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get arabic => 'Árabe';
+
+  @override
+  String get login_to_your_account => 'Login to your account';
+
+  @override
+  String get create_your_account => 'Create your account';
+
+  @override
+  String get enter_your_email => 'Enter your email';
+
+  @override
+  String get enter_your_password => 'Enter your password';
+
+  @override
+  String get forget_password => 'Forget Password? ';
+
+  @override
+  String get dont_have_an_account => 'Don’t have an account';
+
+  @override
+  String get login => 'Login';
+
+  @override
+  String get signup => 'Signup';
+
+  @override
+  String get login_with_google => 'Login with Google';
 }

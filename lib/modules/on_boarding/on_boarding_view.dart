@@ -1,3 +1,4 @@
+import 'package:evently_app/core/config/routes/pages_route_name.dart';
 import 'package:evently_app/core/config/theme/app_colors.dart';
 import 'package:evently_app/core/gen/assets.gen.dart';
 import 'package:evently_app/core/utils/provider/app_settings_controller.dart';
@@ -46,7 +47,13 @@ class OnBoardingView extends StatelessWidget {
             SelectThemeWidget(),
             Spacer(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  PagesRouteName.signIn,
+                  (route) => false,
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.primaryColor,
                 padding: EdgeInsets.symmetric(vertical: 10),

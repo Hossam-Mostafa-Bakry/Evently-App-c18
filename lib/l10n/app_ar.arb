@@ -6,5 +6,14 @@
   "next": "التالي",
   "skip": "تخطي",
   "lets_start": "لنبدأ",
-  "arabic": "العربية"
+  "arabic": "العربية",
+  "login_to_your_account": "Login to your account",
+  "create_your_account": "Create your account",
+  "enter_your_email": "Enter your email",
+  "enter_your_password": "Enter your password",
+  "forget_password": "Forget Password? ",
+  "dont_have_an_account": "Don’t have an account",
+  "login": "Login",
+  "signup": "Signup",
+  "login_with_google": "Login with Google"
 }

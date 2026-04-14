@@ -5,9 +5,15 @@ abstract class AppThemeManager {
   static ThemeData lightTheme() => ThemeData(
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: AppColors.primary,
+      unselectedItemColor: AppColors.secText,
+    ),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent,
       elevation: 0,
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
       // iconTheme: IconThemeData(
       //   color: Colors.black
       // ),
@@ -17,6 +23,12 @@ abstract class AppThemeManager {
       // ),
     ),
     textTheme: TextTheme(
+      headlineSmall: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: AppColors.primary,
+      ),
       titleLarge: TextStyle(
         fontFamily: "Poppins",
         fontSize: 20,
@@ -38,8 +50,8 @@ abstract class AppThemeManager {
       bodyMedium: TextStyle(
         fontFamily: "Poppins",
         fontSize: 14,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
+        fontWeight: FontWeight.w400,
+        color: AppColors.secText,
       ),
     ),
   );
@@ -48,8 +60,23 @@ abstract class AppThemeManager {
     primaryColor: AppColors.primaryDark,
     primaryColorDark: AppColors.primaryDark,
     scaffoldBackgroundColor: AppColors.scaffoldDarkBackgroundColor,
-    appBarTheme: AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: AppColors.primary,
+      unselectedItemColor: AppColors.secText,
+    ),
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ),
     textTheme: TextTheme(
+      headlineSmall: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
       titleLarge: TextStyle(
         fontFamily: "Poppins",
         fontSize: 20,
