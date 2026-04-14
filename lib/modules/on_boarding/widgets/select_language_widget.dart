@@ -68,7 +68,7 @@ class SelectLanguageWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                   border: Border.all(
                     color: provider.isDark()
-                        ? AppColors.strokeBorder
+                        ? AppColors.strokeDarkBorder
                         : Colors.transparent,
                   ),
                 ),
